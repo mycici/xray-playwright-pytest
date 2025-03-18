@@ -159,4 +159,40 @@ If you see an authentication error with Xray Cloud API:
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Running Tests in Bitbucket Pipelines
+
+This project is configured to run tests automatically in Bitbucket Pipelines using the `bitbucket-pipelines.yml` configuration file. 
+
+### CI/CD Pipeline
+
+The pipeline will:
+1. Set up a Python 3.12 environment
+2. Install dependencies from `requirements.txt`
+3. Install Playwright with Chromium
+4. Run the tests with pytest
+5. Upload logs, screenshots, and test reports as artifacts
+
+### Pipeline Variables
+
+For the Xray integration to work in Bitbucket Pipelines, you need to add the following repository variables:
+
+1. Go to Repository Settings > Pipelines > Repository variables
+2. Add the following variables:
+   - `XRAY_CLIENT_ID`: Your Xray Cloud client ID
+   - `XRAY_CLIENT_SECRET`: Your Xray Cloud client secret
+
+### Manual Testing
+
+You can also run a manual pipeline using the "manual-test" custom pipeline to trigger test execution on demand. 
+
+### Viewing Test Results
+
+After your pipeline runs, you can:
+
+1. View test results in the Bitbucket pipeline run
+2. Download artifacts to see screenshots and logs
+3. Check your Xray Cloud dashboard for updated test executions
+
+Test failures in Bitbucket will include screenshots as artifacts, and the same screenshots will be uploaded to Xray Cloud as evidences for the test execution. 
