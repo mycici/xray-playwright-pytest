@@ -1,0 +1,41 @@
+image: python:3.12
+
+definitions:
+  caches:
+    playwright: ~/.cache/ms-playwright
+
+pipelines:
+  default:
+    - step:
+        name: Install dependencies and run tests
+        caches:
+          - pip
+          - playwright
+        script:
+          - pip install -r requirements.txt
+          - python -m playwright install --with-deps chromium
+          - mkdir -p logs screenshots
+          - python -m pytest tests/ -v
+        artifacts:
+          - logs/**
+          - screenshots/**
+          - test-results.xml
+          - report.xml
+
+  custom:
+    manual-test:
+      - step:
+          name: Install dependencies and run tests (manual)
+          caches:
+            - pip
+            - playwright
+          script:
+            - pip install -r requirements.txt
+            - python -m playwright install --with-deps chromium
+            - mkdir -p logs screenshots
+            - python -m pytest tests/ -v
+          artifacts:
+            - logs/**
+            - screenshots/**
+            - test-results.xml
+            - report.xml 
