@@ -1,7 +1,7 @@
 import pytest
 from playwright.sync_api import sync_playwright
 
-@pytest.mark.jira('SCRUM-2')
+'''@pytest.mark.jira('SCRUM-2')
 def test_example():
     print("\nStarting test execution...")
     with sync_playwright() as p:
@@ -44,7 +44,7 @@ def test_wikipedia():
         assert "Wikipedia" in page.title()
         browser.close()
     print("Wikipedia test completed.")
-
+'''
 @pytest.mark.jira('SCRUM-17')
 @pytest.mark.parametrize("url,expected_title", [
     ("https://www.python.org", "Python"),

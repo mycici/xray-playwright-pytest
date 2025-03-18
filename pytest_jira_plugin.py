@@ -2,11 +2,9 @@ import pytest
 import requests
 import json
 import os
-from datetime import datetime
+from datetime import datetime, UTC
 
 # Xray Cloud API configuration
-XRAY_CLIENT_ID = "XRAY API"
-XRAY_CLIENT_SECRET = "XRAY API"
 XRAY_CLOUD_BASE_URL = "https://xray.cloud.getxray.app/api/v1"
 
 # Ensure logs directory exists
@@ -25,7 +23,7 @@ def log_message(message):
 
 def format_xray_json(test_results):
     """Format test results in Xray JSON format"""
-    current_time = datetime.utcnow().isoformat() + "Z"
+    current_time = datetime.now(UTC).isoformat() + "Z"
     # Extract project key from first test case ID
     project_key = test_results[0]['jira_id'].split('-')[0] if test_results else "SCRUM"
     
@@ -88,14 +86,11 @@ def format_xray_json(test_results):
     
     return {
         "info": {
-            "summary": f"Ditto Regression {datetime.now().strftime('%Y-%m-%d-%b')}",
+            "summary": f"Ditto Regression {datetime.now().strftime('%Y-%m-%d')}",
             "description": "Automated test execution with Playwright",
             "startDate": current_time,
             "finishDate": current_time,
-            "project": project_key,
-            "version": "1.0",
-            "revision": "1.0",
-            "testEnvironments": ["Chrome"]
+            "project": project_key
         },
         "tests": tests
     }
@@ -208,7 +203,7 @@ def pytest_runtest_makereport(item, call):
         if jira_id:
             # Map pytest status to Xray Cloud status
             status = 'PASSED' if call.excinfo is None else 'FAILED'
-            current_time = datetime.utcnow().isoformat() + "Z"
+            current_time = datetime.now(UTC).isoformat() + "Z"
             
             # Create test result data
             result_data = {
