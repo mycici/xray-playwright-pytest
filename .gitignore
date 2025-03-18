@@ -53,6 +53,7 @@ logs/
 
 # Test Results
 test-results.xml
+screenshots/
 *.json
 !package.json
 !package-lock.json
