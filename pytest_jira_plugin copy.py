@@ -10,8 +10,8 @@ from datetime import datetime, UTC
 # Default values are provided for development, but should be overridden in CI/CD
 # In Bitbucket Pipelines, set these as repository variables:
 # Repository Settings > Pipelines > Repository variables
-XRAY_CLIENT_ID = os.environ.get("XRAY_CLIENT_ID", "E7681963024C4CFB9B4ED37FEADEFFF7")
-XRAY_CLIENT_SECRET = os.environ.get("XRAY_CLIENT_SECRET", "19308c5bbe8a428fc69cd3408778609b5fb297d7a6aff1b8b53f0663bb63e975")
+XRAY_CLIENT_ID = os.environ.get("XRAY_CLIENT_ID", "")
+XRAY_CLIENT_SECRET = os.environ.get("XRAY_CLIENT_SECRET", "")
 XRAY_CLOUD_BASE_URL = "https://xray.cloud.getxray.app/api/v1"  # Using v1 API
 
 # Ensure logs directory exists
